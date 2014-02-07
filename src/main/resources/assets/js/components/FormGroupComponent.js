@@ -8,7 +8,7 @@ define([
       this.props.model.set(event.target.name, event.target.value);
     },
     render: function() {
-      var helpBlock, errors;
+      var errorBlock, errors;
 
       var attribute = this.props.attribute;
       var className = "form-group";
@@ -23,7 +23,7 @@ define([
 
       if (errors != null && errors.length > 0) {
         className += " has-error";
-        helpBlock = errors.map(function(error) {
+        errorBlock = errors.map(function(error) {
           return <div className="help-block">{error.message}</div>;
         });
       }
@@ -38,12 +38,15 @@ define([
 
       return (
         <div className={className}>
-          <label htmlFor={fieldId} className="col-md-3 control-label">
+          <label htmlFor={fieldId} className="col-md-2 control-label">
             {this.props.label}
           </label>
-          <div className="col-md-9">
+          <div className="col-md-7">
             {this.props.children}
-            {helpBlock}
+            {errorBlock}
+          </div>
+          <div className="col-md-3">
+            <span className="help-block">{this.props.help}</span>
           </div>
         </div>
       );

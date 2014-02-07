@@ -32,12 +32,17 @@ define([
         childNodes = this.props.children;
       }
 
+      var navTabsProps = {
+        activeTabId: this.state.activeTabId,
+        onTabClick: this.onTabClick,
+        tabs: this.props.tabs
+      };
+      if (this.props.type != null) navTabsProps.type = this.props.type;
+
+      var navTabsComponent = NavTabsComponent(navTabsProps);
       return (
         <div className={this.props.className}>
-          <NavTabsComponent
-            activeTabId={this.state.activeTabId}
-            onTabClick={this.onTabClick}
-            tabs={this.props.tabs} />
+          {navTabsComponent}
           <div className="tab-content">
             {this.props.children}
           </div>
